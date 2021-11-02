@@ -1,5 +1,10 @@
 import React from 'react';
 import PinCard from '../Pin-Card/PinCard';
+import Header from '../../Header/Header';
+import HeaderMobile from '../../HeaderMobile/HeaderMobile';
+import FooterMobile from '../../FooterMobile/FooterMobile';
+
+import { useMediaQuery } from 'react-responsive'
 
 // Contenedor principal de nuestros pines
 const PinLayout = () => {
@@ -20,7 +25,13 @@ const PinLayout = () => {
     },
   };
 
+  const isDesktopOrLaptop = useMediaQuery({query: '(min-width: 1224px)'})
+  const isMobile = useMediaQuery({ query: '(max-width: 600px)' })
+
   return (
+    <>
+    {isDesktopOrLaptop && <Header/>}
+    {isMobile && <HeaderMobile/>}
     <div style={_stylesLayout.pin_container}>
       <PinCard size='small' image='https://picsum.photos//250/260' />
       <PinCard size='medium' image='https://picsum.photos//250/330' />
@@ -44,6 +55,9 @@ const PinLayout = () => {
       <PinCard size='medium' image='https://picsum.photos//250/336' />
       <PinCard size='large' image='https://picsum.photos//250/456' />
     </div>
+    {isMobile && <FooterMobile/>}
+
+    </>
   );
 };
 
